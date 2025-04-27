@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+
+	<title>Benjamín Benčík, DIMACS REU 2024</title>
+	<link rel="shortcut icon" href="http://dimacs.rutgers.edu/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="style.css">
+	<!-- add math rendering -->
+	<script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS_CHTML"></script>
+	<style type="text/css">
+		dt {
+			font-weight: bold;
+		}
+
+		dd {
+			margin: 10px;
+		}
+
+		th {
+			text-align: right;
+		}
+	</style>
+</head>
+
+<body data-new-gr-c-s-check-loaded="8.912.0" data-gr-ext-installed="" style="background-image: none;">
+
+
+	<div style="max-width:700px;margin:25px auto 25px auto;background-color:rgba(255,255,255, 0.9);" "="">
+		<div style=" text-align:center;">
+		<a href="http://reu.dimacs.rutgers.edu/2024/">
+			<img src="images/dimacs-logo.jpg" alt="DIMACS" width=100%>
+		</a>
+	</div>
+
+	<nav>
+		<a href="#general-info">General Information</a>
+		<a href="#project">Project Description</a>
+		<a href="#research-log">Research Log</a>
+		<a href="#acknowledgements">Acknowledgements</a>
+	</nav>
+
+	<h2>General Information</h2>
+
+	<!-- <div style="float:left;">
+		<img src="images/picture_website.png" style="border:1px solid black; margin:10px;" height="200px" alt="me"
+			id="photo">
+	</div> -->
+
+
+	<div>
+		<table>
+			<tbody>
+				<tr>
+					<th>Student:</th>
+					<td id="name">Benjamín Benčík</td>
+				</tr>
+				<tr>
+					<th>Office:</th>
+					<td>CoRE 444</td>
+				</tr>
+				<tr>
+					<th>School:</th>
+					<td><a href="https://www.mff.cuni.cz/en/">Faculty of Mathematics and Physics, Charles University</a>
+					</td>
+				</tr>
+				<tr>
+					<th>Contact:</th>
+					<td>bencikben@gmail.com</td>
+				</tr>
+				<tr>
+					<th>Project:</th>
+					<td>Memory-query tradeoffs for property testing</td>
+				</tr>
+			</tbody>
+			<tbody>
+				<tr>
+					<th>Mentor:</th>
+					<td><a href="https://sites.google.com/view/sumegha-garg/home">Sumegha Garg</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<hr style="clear:left;">
+		<div style="float:left;">
+			<a href="https://cuni.cz/UKEN-1.html"><img src="images/UK-6450-version1-znak_uk_cerna_barva.png" width="100"
+					style="margin:10px;"></a>
+		</div>
+
+		<p>I am part of a group of students from <a href="https://cuni.cz/UKEN-1.html">Charles University</a> that
+			includes
+			<a href="http://reu.dimacs.rutgers.edu/~ta661/">Todor Antic</a>,
+			<a href="http://reu.dimacs.rutgers.edu/~ad2090/">Adam Dzavoronok</a>,
+			<a href="http://reu.dimacs.rutgers.edu/~jg2147/">Jelena Glisic</a>,
+			<a href="http://reu.dimacs.rutgers.edu/~rj612/">Robert Jaworski</a>,
+			<a href="http://reu.dimacs.rutgers.edu/~tk807/">Tymur Kotkov</a>,
+			<a href="http://reu.dimacs.rutgers.edu/~sk3155/">Sofia Kotsiubynska</a>,
+			<a href="http://reu.dimacs.rutgers.edu/~jk2238/">Julia Krizanova</a>,
+			<a href="http://reu.dimacs.rutgers.edu/~vk499/">Volodymyr Kuznietsov</a>,
+			<a href="http://reu.dimacs.rutgers.edu/~tr627/">Tymofii Reizin</a> and
+			<a href="http://reu.dimacs.rutgers.edu/~js3759/">Jakub Sosovicka</a>,
+			<a href="http://reu.dimacs.rutgers.edu/~fu37/">Filip Uradnik</a>.
+			<a href="http://reu.dimacs.rutgers.edu/~pz173/">Patrik Zavoral</a>.
+		</p>
+		<hr style="clear:left;">
+
+		<h2>About me</h2>
+		I study Computer Science and I am interested in cryptography combinatorics and complexity theory. For more
+		info check out <a href="https://benbencik.github.io/">awesome personal page</a>
+	</div>
+
+	<h2 id="project">Project Description</h2>
+	<p>
+		Property testing is a natural notion of approximation for
+		decision problems, where given a property (or decision), the task is to
+		distinguish whether a given instance has this property or is "far" from
+		any instance having the property. Such tasks are widely used in various
+		areas of TCS, such as coding theory, hardness of approximation and graph
+		algorithms. In this project, we will focus on property testing on
+		graphs, and explore the impact of memory constraints on the complexity
+		of property testing. One of main measures of complexity for a property
+		testing algorithm is its query complexity, which is the maximum number
+		of input elements queried to determine whether the graph satisfies a
+		given property.
+	</p>
+
+	<hr style="clear:left;">
+
+	<h2 id="research-log">Research Log</h2>
+
+	<h3> Week 1 </h3>
+
+	<p>
+		Before the start of the project I have read <a
+			href="https://www.cs.princeton.edu/courses/archive/spr04/cos598B/bib/Ron-tutorial.pdf">Property testing</a>
+		by Dana Ron, which offers a comprehensive summary of the field. In the first week project I have looked at the
+		results discovered in the field and tried to estimate memory complexity for the existing property testing
+		algorithms.
+
+	<table>
+		<tr>
+			<td>bipartitness[<a href="#ref1">1</a>]: \(\widetilde{\mathcal{O}}(\epsilon^{-2})\)</td>
+			<td>k-colorability[<a href="#ref1">1</a>]: \(poly(\widetilde{\mathcal{O}}(k^4 / \epsilon^{6}))\)</td>
+			<td>p-clique[<a href="#ref1">1</a>]: \( \widetilde{\mathcal{O}}(p / \epsilon^{2}) \)</td>
+			<td>connectivity[<a href="#ref2">2</a>]: \( \mathcal{O}\left(\frac{d}{M/N \cdot \epsilon}\right) \)</td>
+			<td>eulerian[<a href="#ref2">2</a>]: \( \widetilde{\mathcal{O}}\left(\frac{d}{M/N \cdot \epsilon/2}\right)
+				\)</td>
+		</tr>
+	</table>
+
+	The notation with ~ hide logarithmic factors. The memory complexity is given in terms of distance parameter
+	\( \epsilon \), which is the maximum distance from the property.
+	</p>
+
+	<p>
+		We have not yet decided on the exact objective of the project, but next week I will decide which of the
+		properties might make the most sense to study in terms of the memory complexity. The project will have mainly
+		exploratory basis and we I focus on constructing lower bounds rather than designing a specific algorithm.
+
+	</p>
+
+	<h3> Week 2 </h3>
+
+	<p>
+		Most of the properties I have looked at had trivial lower bounds for memory complexity. We have decided to study
+		algorithms that decide if a graph has: triangle, \(k\)-clique or \(k\)-star. So far the bounds that I have
+		achieved to show are only trivial.
+	</p>
+
+	<p>
+		Moreover I have read additional resources on property testing and techniques used in the field. I have looked at
+		first three lectures of <a href="https://www.cs.princeton.edu/courses/archive/fall11/cos597D/">Information
+			theory in computer science</a> and the streaming model for graphs described in <a
+			href="https://www.cs.dartmouth.edu/~ac/Teach/data-streams-lecnotes.pdf">Data Streaming Algorithms</a>.
+	</p>
+
+	<h3> Week 3 </h3>
+
+	I have looked for known tester of the selected properties. My main focus was on the <a
+		href="https://people.csail.mit.edu/ronitt/COURSE/S19/Handouts/scribe8.pdf">triangle-freeness</a> property tester
+	utilizing the Szemerédi’s Regularity Lemma. I have tried to come up with indistinguishable distributions for the
+	lower bound on testing star-freeness but did not show anything better than the trivial bounds. With my mentor we
+	have made the problem more specific and I started working testers for the star-freeness property on more specific
+	graph families.
+
+	<h3> Week 4 </h3>
+
+	<p>
+		This week my main focus was on the star-freeness property. I have tried to construct 2 testers where one
+		optimized the query complexity and the other memory complexity. The aim is to be able to show some trade-off and
+		prove lower bound for query complexity \( \times \) memory complexity. To be more specific I have tried to
+		distinguish the following families:
+	</p>
+
+	<ul>
+		<li> random graph with \(n\) vertices and upper bound on degree \(3/4 n\) </li>
+		<li> the same as the previous family but one vertex is connected to the whole graph </li>
+	</ul>
+
+	<p>
+		I was able to find algorith with complexities \( \mathcal{O}(n^2), \mathcal{O}(\log{n}) \) and a second one with
+		complexities \( \mathcal{O}(\log{n}), \mathcal{O}(n\log{n}) \) and prove their validity. However, my mentor
+		eventually came up with an algorithm that achieved the optimum in both cases \( \mathcal{O}(n),
+		\mathcal{O}(\log{n}) \) meaning that there was no tradeoff. I provided thorough analysis and proves in a
+		technial writeup.
+	</p>
+
+
+	<h3> Week 5 </h3>
+
+	<p>
+		I have studied a problem that tries to distinguish random graphs with degree bounds \(1/4n\) and \(3/4n\). In
+		the design of various testers the gap between "memory optimal" and "query optimal" aproaches was small. That
+		being said I did not find the memory size to make a huge trade-off for the property testing problems that I have
+		studied. Usually the memory effiecient algorithm was counting and could get aways with constant memory. For this
+		the section on Aproximating average degree from [<a href="#ref3">3</a>] was very helpful. On other hand I was
+		struggling to get a significantly more efficient for large memory.\ I have looked at other approaches, I found
+		out that graph adjacency matrix can be subjected to spectral analysis which offers some insight about the graph
+		however the query complexity for approximating eigenvectors is expensive as well.
+	</p>
+
+	<p>
+
+	</p>
+	I have tried to consider different models. My mentor suggested looking at a semi-randomness model where tester can
+	query a vertex \(v\) and recieves a random edge connect to \(v\). In this setting I have tried to distinguish two
+	families:
+	<ul>
+		<li> Random graph where each edge is present with probability 1/2 </li>
+		<li> Partition the vertex set into two random sets of size n/2. Both these sets have n/2 sized cliques. </li>
+	</ul>
+
+	<h3> Week 6 </h3>
+
+	<p>
+		I came up with algorithm for the graph families that I have constructed the previous week but it mainly relied
+		on the fact that the cliques were isolated. This instance of the problem is relatively easy and it can be
+		computed in \(\sqrt{n}\) instances. We have tried to design a harder problem a specified graph families where
+		the problem is to distinguish clique of size \(n/4\). Observation to this problem is that sampling into a random
+		sets is probabily not going to make a valid tester since, it is not propbable that we will obtain an edge
+		between those sets.
+	</p>
+
+
+	<h3> Week 7 </h3>
+
+	<p>
+		We spent the week mostly by wrapping our notes up, and by preparing the final presentation.
+	</p>
+
+
+	<h2>After REU Logs</h2>
+
+	<h3> 28.10.2024 </h3>
+
+	<p>
+		During the rest of the summer I was studying for the final graduation test then I was moving to <a
+			href="https://www.tum.de/">Technical University of Munich</a>.
+
+		Currectly we are working on \(n/3\)-clique tester for the semi-randomness model. Querying \(v\) gives another
+		vertex \(u\) and a bit indicating if there exists an edge \((u, v)\). We managed to come up with algorithm for
+		the property tester and this week I have been writing the analysis for this algorithm. We constructed stronger
+		algorithm that can have access to the whole neighbourood and then showed that the quantity computed in our
+		algorithm is a correct approximation of the idead quantity. We have also shown that the quantity is a good
+		approximation of the number of triangles in the graph. The algorithm is based on the idea of counting triangles
+		in the graph and then using the fact that the number of triangles is a good approximation of the number of
+		\(n/3\)-cliques.
+	</p>
+
+	<h3> 08.04.2025 </h3>
+
+	<p>
+		Long time no see. The project is not more collaborative as Eric Van Grinsven has joined the team. Since the last
+		time we needed to change the we are working with, which made the analysis for our algorithm more complicated.
+		However we are getting closer to proving that the algorithm making \(\mathcal{O}(\sqrt{n})\) queries is
+		possible. As the project is getting more complex maybe logging the progress is not such a bad idea after all. I
+		will be more frequent:)
+	</p>
+
+	<h3> 22.04.2025 </h3>
+
+	<p>
+		Finally we are getting back to the paper on <a href="https://arxiv.org/pdf/1409.2138"> Streaming Lower Bounds for
+			Approximating MAX-CUT</a>, which might help us the establish the lower bounds for our problem. We have read parts of the paper with and tried to understand their techique although I still lack intuition for the analysis of boolean functions. I want to read also parts of <a href="https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=91e31089d058febb9f3d5b4f06c1b60c27295448">Fourier analysis for probabilistic communication complexity</a>. Tomorrow we will have a meeting where we will discuss the application of this technique to our problem.
+	</p>
+
+
+	<hr style="clear:left;">
+
+	<h2> Resources </h2>
+
+	<ol>
+		<li id="ref1"><a href="https://www.wisdom.weizmann.ac.il/~oded/PDF/ggr-jacm.pdf">Property Testing and Its
+				Connection to
+				Learning and Approximation</a> 98 - Oded Goldreich, Shafi Goldwasser, Dana Ron</li>
+		<li if="ref2"><a
+				href="https://www.cs.princeton.edu/courses/archive/spring04/cos598B/bib/GoldreichR-boundedG.pdf">Property
+				Testing in Bounded Degree Graphs</a> 97 - Oded Goldreich, Dana Ron</li>
+		<li if="ref3"><a href="https://www.wisdom.weizmann.ac.il/~oded//PDF/pt-v3.pdf">Introduction to Property
+				Testing</a> 2017 - Oded Goldreich</li>
+
+
+	</ol>
+
+	<h2 id="acknowledgements"> Acknowledgements </h2>
+
+
+	<div style="float:left;">
+		<img src="images/eu.png" style="border:1px solid black; margin:10px;" height="35Apx">
+	</div>
+
+	<p>
+		This project has received funding from the European Union’s Horizon 2020 research and innovation programme
+		under the Marie Skłodowska-Curie grant agreement No 823748.
+	</p>
+
+</html>

@@ -1,0 +1,8 @@
+To update your website on Mac/Linux without the use of PuTTY you can go to your terminal and use
+
+`scp -o HostKeyAlgorithms=ssh-rsa,ssh-dss index.html [netid]@dimacs.rutgers.edu:/home/reu/2024/[netid]/public_html`
+
+to update your website (this assumes your index.html file is in the folder you've navigated to in your terminal; else replace it as appropriate) 
+
+scp -o HostKeyAlgorithms=ssh-rsa * bb921@dimacs.rutgers.edu:/home/reu/2024/bb921/public_html/
+
