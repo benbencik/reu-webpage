@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="date" content="April 27, 2025">
+    <title>Proof Technique</title>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS_CHTML"></script>
+    <link rel="stylesheet" href="notes.css">
+</head>
+<body>
+    <header>
+        <h1>Streaming MaxCut Section 5 Proof Technique</h1>
+        <p class="date">April 27, 2025</p>
+    </header>
+    <h3 id="choose-a-hard-input-distribution">1. Choose a Hard Input
+    Distribution</h3>
+    <ul>
+    <li>Let Alice’s input <span class="math inline">\(x \in
+    \{0,1\}^n\)</span> be drawn from a distribution designed to be hard
+    for the task</li>
+    <li>Bob receives input <span class="math inline">\(M, w\)</span> and
+    Alice’s <span class="math inline">\(c\)</span>-bit message</li>
+    <li>Argue that any protocol with communication <span
+    class="math inline">\(c\)</span> and advantage <span
+    class="math inline">\(\delta\)</span> must satisfy <span
+    class="math inline">\(c = \Omega(\delta \sqrt{n})\)</span>.</li>
+    <li>By <strong>Yao’s minimax principle</strong>, we can assume that
+    Alice and Bob are deterministic and analyze their performance on a
+    fixed hard distribution.</li>
+    </ul>
+    <p>We can claim that Alice calculates the message deterministically
+    by <strong>Yao’s minimax principle</strong>. Informally the
+    principle states that to prove a lower bound against randomized
+    algorithms, it suffices to analyze a <em>hard input
+    distribution</em>. We can fix the worst-case randomness and analyze
+    the protocol as deterministic over a specially chosen input
+    distribution.</p>
+    <h3 id="message-induced-partition-of-the-input-space">2.
+    Message-Induced Partition of the Input Space</h3>
+    <ul>
+    <li>Alice’s message function <span class="math inline">\(P :
+    \{0,1\}^n \to \{0,1\}^c\)</span> induces a partition of the input
+    space into <span class="math inline">\(2^c\)</span> parts: <span
+    class="math display">\[
+    A_i = \{ x \in \{0,1\}^n : P(x) = i \}
+    \]</span></li>
+    <li>Since <span class="math inline">\(2^c\)</span> is small, a
+    simple counting argument implies that many inputs must lie in
+    <strong>large</strong> partitions. Let <span
+    class="math inline">\(A\)</span> be one such large part</li>
+    <li>The protocol must distinguish between two distributions over
+    Bob’s input:<span class="math display">\[w \sim Mx \quad \text{vs.}
+    \quad w \sim \mathcal{U}(\{0,1\}^r)\]</span> where <span
+    class="math inline">\(x\)</span> is uniformly sampled from a fixed
+    large partition <span class="math inline">\(A\)</span> and <span
+    class="math inline">\(M\)</span> is a fixed matrix.</li>
+    </ul>
+    <h3 id="fourier-analysis-of-the-conditioned-distribution">3. Fourier
+    Analysis of the Conditioned Distribution</h3>
+    <ul>
+    <li>We study distribution of <span class="math inline">\(Mx\)</span>
+    where <span class="math inline">\(x\)</span> is uniformly random in
+    the fixed large parition
+    <ul>
+    <li>Let <span class="math inline">\(p_M(z)=\Pr_{x\in A}[M x = z] =
+    \frac{|\{ x \in A: Mx = z \}|}{|A|}\)</span></li>
+    <li>In other words <span class="math inline">\(p_{M}(z)\)</span> is
+    the distribution for <span class="math inline">\(x \in A \in
+    \{0,1\}^c\)</span></li>
+    <li>Next we <strong>aim to prove that <span
+    class="math inline">\(p_{M}(z)\)</span> is close to uniform</strong>
+    by bounding fourier mass weight coefficients of <span
+    class="math inline">\(p_{M}(z)\)</span> (this is just application of
+    definition looks easy)</li>
+    <li>Using the previous we can calculate the total variational
+    distance <span class="math inline">\(||p_{M} -
+    U_{r}||_{tvd}^2\)</span> by using Parsevals theorem</li>
+    <li>We can set distance from uniform function <span
+    class="math inline">\(g(z) = p_{M}(x)-\frac{1}{2^c}\)</span>, so
+    <span class="math inline">\(||p_{M} - U_{r}||_{tvd} = \sum_{x}
+    |g(z)|\)</span></li>
+    </ul></li>
+    </ul>
+    <p>Parseval theorem states that for any <span
+    class="math inline">\(f: \{ 0,1 \}^n \to \mathbb{R}\)</span>: <span
+    class="math display">\[\mathbb{E}_{x \sim \{ 0,1 \}^n}[f(x)^2] =
+    \sum_{v \in \{ 0,1 \}^n} \widehat{f}(v)^2\]</span> Note: if <span
+    class="math inline">\(f\)</span> is defined on <span
+    class="math inline">\(\{ -1,1 \}^n\)</span>, then the corresponding
+    function defined on <span class="math inline">\(\{ 0,1 \}^n\)</span>
+    is simply <span class="math inline">\(f_{01}(x_{1}, x_{2}, \ldots,
+    x_{n}) = f((-1)^{x_{1}}, (-1)^{x_{2}}, \ldots,
+    (-1)^{x_{n}})\)</span>.</p>
+    <h3 id="bounding-fourier-spectrum-via-representation-counting">4.
+    Bounding Fourier Spectrum via Representation Counting</h3>
+    <ul>
+    <li>For a function <span class="math inline">\(f\)</span> the
+    fourier coefficients <span
+    class="math inline">\(\widehat{f}(v)\)</span> measure how much <span
+    class="math inline">\(f\)</span> correlates with <span
+    class="math inline">\((-1)^{x \cdot v}\)</span>
+    <ul>
+    <li>Distance of <span class="math inline">\(p_{M}\)</span> to
+    uniformity si bounded by <span class="math inline">\(l_{2}\)</span>
+    notm of part of the fourier spectrum of <span
+    class="math inline">\(f\)</span></li>
+    <li>Specifically each fourier coefficient <span
+    class="math inline">\(\widehat{f}(v)\)</span> we bound the number of
+    ways of representing <span class="math inline">\(v \in \{ 0,1
+    \}^n\)</span> as <span class="math inline">\(M^T s\)</span> where
+    <span class="math inline">\(s \in \{ 0,1 \}^r\)</span> as <span
+    class="math display">\[\mathbb{E}_{M}[\#\{ s: M^T s = v \}] \leq
+    \text{ some suitable bound }\]</span></li>
+    </ul></li>
+    <li>This limits the influence of any single Fourier character,
+    allowing us to bound the total Fourier mass and thus the deviation
+    from uniform.</li>
+    <li>Eventually we derive: <span class="math inline">\(\mathbb{E}_M
+    \left[ \|p_M - \mathcal{U}_r\|_{\mathrm{tvd}}^2 \right] =
+    \mathcal{O}(\text{small})\)</span> in this paper the proof is
+    specific to the distribution of the hard graph distribution</li>
+    </ul>
+    <h3 id="use-tvd-to-derive-communication-lower-bound">5. Use TVD to
+    Derive Communication Lower Bound</h3>
+    <ul>
+    <li>Total variation distance obeys: <span class="math display">\[
+    \| (X, Y^1) - (X, Y^2) \|_{\mathrm{tvd}} = \mathbb{E}_{X}[\| Y^1_X -
+    Y^2_X \|_{\mathrm{tvd}}]
+    \]</span></li>
+    <li>We establish distributions <span class="math inline">\(D^1,
+    D^2\)</span> depending on Yes or No instance of the problem and show
+    that they are hard to distinguish with messages of length <span
+    class="math inline">\(\mathcal{o}(\sqrt{ n })\)</span></li>
+    <li>The protocol’s advantage implies a gap between <span
+    class="math inline">\(D^1\)</span> and <span
+    class="math inline">\(D^2\)</span>, but we’ve shown that conditioned
+    on Alice’s message, this gap is small unless <span
+    class="math inline">\(c = \Omega(\sqrt{n})\)</span>.</li>
+    <li>By showing <span class="math inline">\(||D^1 - D^2||_{tvd} =
+    \mathcal{O}(\text{ something small })\)</span>, we prove
+    low-communication protocols cannot distinguish D-BHP</li>
+    </ul>
+</body>
+</html>
